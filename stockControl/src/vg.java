@@ -1,4 +1,3 @@
-
 public class vg {
 	
 	String title;
@@ -9,7 +8,7 @@ public class vg {
 	
 	
 	// constructor
-	vg(String title, int releaseYear, String publish, String dev, String platform)
+	public vg(String title, int releaseYear, String publish, String dev, String platform)
 	{
 		this.title = title;
 		this.releaseYear = releaseYear;
@@ -18,9 +17,25 @@ public class vg {
 		this.platform = platform;
 	}
 	
-	public String toString() {
+	/*public String toString() 
+	{
 		return title+" "+releaseYear+" "+publish+" "+dev+" "+platform;
-	}
- 
+	}*/
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public int getReleaseYear() {
+		return releaseYear;
+	}
+
+	public void setReleaseYear(int releaseYear) {
+		this.releaseYear = releaseYear;
+	}
+	
 }

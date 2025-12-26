@@ -5,6 +5,14 @@ public class main {
 
 	public static void main(String[] args) 
 	{
+		Scanner scnr = new Scanner(System.in);
+		
+		// null safety (asked Google Gemini)
+		vg newGame = null;
+		
+		// for storing objects in array list
+		ArrayList<vg> vgList = new ArrayList<vg>();
+		
 		while (true) 
 		{
 			System.out.println("VG Company Stock Control. pick an option: ");
@@ -14,12 +22,7 @@ public class main {
 			System.out.println("d. Delete a video game. ");
 			System.out.println("e. Exit program. ");
 			
-			Scanner scnr = new Scanner(System.in);
 			String menuSelect = scnr.nextLine();
-			
-			// for storing objects in array list
-			ArrayList<vg> vgList = new ArrayList<vg>();
-			
 			switch(menuSelect)
 			{
 			case "a":
@@ -38,15 +41,12 @@ public class main {
 				String platform = scnr.nextLine();
 				
 				// call constructor
-				vg newGame = new vg(title, releaseYear, publish, dev, platform);
+				newGame = new vg(title, releaseYear, publish, dev, platform);
 				System.out.println("You have entered the following: "+newGame.title+", "+newGame.releaseYear+", "+newGame.publish+", "+newGame.dev+", "+newGame.platform+".");
 				
 				// store object in list 
-				// ArrayList<vg> vgList = new ArrayList<vg>();
 				vgList.add(newGame);
-				
-				// prints the objects stored in the array 
-				// System.out.println(vgList.get(0).toString());
+
 				break;
 	
 			case "b":
@@ -54,19 +54,24 @@ public class main {
 				// asks user the title and release date to identify the game they are wanting to view 
 				System.out.println("What is the title of the game you are wanting to view? ");
 				String findTitle = scnr.nextLine();
-				System.out.println("What is the release year of the game you are wanting to view? ");
-				int findYear = scnr.nextInt();
+				// System.out.println("What is the release year of the game you are wanting to view? ");
+				// int findYear = scnr.nextInt();
 				// find value in array list
 				// && vgList.contains(findYear)
-				if (vgList.contains(findTitle))
+				for (newGame : vgList) 
 				{
-					// print the details of objects that have this these details
-					System.out.println("found it, printing details...");
+					if (newGame.getTitle().equalsIgnoreCase(findTitle))
+					{
+						// print the details of objects that have this these details
+						System.out.println("found it, printing details...");
+					}
+					else 
+					{
+						System.out.println("Not found.");					
+					}
+					
 				}
-				else 
-				{
-					System.out.println("Not found.");					
-				}
+				
 				// try and find way to loop this case if the user makes error
 				break;
 	
