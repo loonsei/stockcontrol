@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class vg {
 	
 	String title;
@@ -22,6 +24,8 @@ public class vg {
 		return title+" "+releaseYear+" "+publish+" "+dev+" "+platform;
 	}*/
 
+	
+	// getters and setters
 	public String getTitle() {
 		return title;
 	}
@@ -37,5 +41,28 @@ public class vg {
 	public void setReleaseYear(int releaseYear) {
 		this.releaseYear = releaseYear;
 	}
-	
+
+	public String getPublish() {
+		return publish;
+	}
+
+	public void setPublish(String publish) {
+		this.publish = publish;
+	}
+
+	public String getDev() {
+		return dev;
+	}
+
+	public void setDev(String dev) {
+		this.dev = dev;
+	}
+
+	public String getPlatform() {
+		return platform;
+	}
+
+	public void setPlatform(String platform) {
+		this.platform = platform;
+	}
 }

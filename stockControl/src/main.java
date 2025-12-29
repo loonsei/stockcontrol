@@ -13,6 +13,9 @@ public class main {
 		// for storing objects in array list
 		ArrayList<vg> vgList = new ArrayList<vg>();
 		
+		// array list to store objects that will be deleted 
+		ArrayList<vg> forDeletion = new ArrayList<vg>();
+		
 		while (true) 
 		{
 			System.out.println("VG Company Stock Control. pick an option: ");
@@ -42,7 +45,7 @@ public class main {
 				
 				// call constructor
 				newGame = new vg(title, releaseYear, publish, dev, platform);
-				System.out.println("You have entered the following: "+newGame.title+", "+newGame.releaseYear+", "+newGame.publish+", "+newGame.dev+", "+newGame.platform+".");
+				System.out.println("You have entered the following: "+newGame.title+", "+newGame.releaseYear+", "+newGame.publish+", "+newGame.dev+", "+newGame.platform+".\n");
 				
 				// store object in list 
 				vgList.add(newGame);
@@ -51,25 +54,27 @@ public class main {
 	
 			case "b":
 			case "B":
-				// asks user the title and release date to identify the game they are wanting to view 
+				// asks user the vg title to identify the game they are wanting to view 
 				System.out.println("What is the title of the game you are wanting to view? ");
 				String findTitle = scnr.nextLine();
-				// System.out.println("What is the release year of the game you are wanting to view? ");
-				// int findYear = scnr.nextInt();
-				// find value in array list
-				// && vgList.contains(findYear)
-				for (newGame : vgList) 
+				boolean titleFound = false;
+				// search through list
+				for (vg g : vgList) 
 				{
-					if (newGame.getTitle().equalsIgnoreCase(findTitle))
+					// if user inputed title exists in list
+					if (g.getTitle().equalsIgnoreCase(findTitle))
 					{
 						// print the details of objects that have this these details
-						System.out.println("found it, printing details...");
-					}
-					else 
-					{
-						System.out.println("Not found.");					
+						titleFound = true;
+						System.out.println("Found! Showing details...");
+						System.out.println("Title: "+g.title+" \nRelease year: "+g.releaseYear+" \nPublisher: "+g.publish+" \nDeveloper: "+g.dev+" \nPlatform: "+g.platform+" \n");
 					}
 					
+				}
+				
+				if (!titleFound) 
+				{
+					System.out.println("Not found.");
 				}
 				
 				// try and find way to loop this case if the user makes error
@@ -77,13 +82,55 @@ public class main {
 	
 			case "c":
 			case "C":
-				// ask user what detail they want to change 
+				// ask user the title and the release date of the item they want to change 
 				System.out.println("What detail would you like to change? Select from the following: \ntitle\netc.");
 				break;
 	
 			case "d":
 			case "D":
-				// ask for name and release date, delete object 
+				// ask for title and release date, delete object 
+				System.out.println("What is the title of the item you would like to delete?");
+				String findTitleForDeletion = scnr.nextLine();
+				System.out.println("What is the release date of the item you would like to delete?");
+				int findYearForDeletion = scnr.nextInt();
+				scnr.nextLine(); // throwaway nextLine bc of the nextInt
+				boolean fdFound = false;
+				
+				for (vg d : vgList) 
+				{
+					if (d.getTitle().equalsIgnoreCase(findTitleForDeletion) && d.getReleaseYear() == findYearForDeletion)
+					{
+						fdFound = true;
+						System.out.println("Found! Showing details...");
+						System.out.println("Title: "+d.title+" \nRelease year: "+d.releaseYear+" \nPublisher: "+d.publish+" \nDeveloper: "+d.dev+" \nPlatform: "+d.platform+" \n");
+						System.out.println("Do you want to delete this item? Answer Y or N.");
+						String userAnswer = scnr.nextLine();
+						if (userAnswer.equalsIgnoreCase("Y")) 
+						{
+							// add to forDeletion array list 
+							forDeletion.add(d);
+							System.out.println("Item removed!");
+						}
+						else if (userAnswer.equalsIgnoreCase("N")) 
+						{
+							System.out.println("Returning to main menu...");
+						}
+						else 
+						{
+							System.out.println("Invalid input.");
+						}
+					}
+				}
+				
+				// delete all objects stored on deletion list 
+				// https://www.w3schools.com/java/ref_arraylist_removeall.asp 
+				vgList.removeAll(forDeletion);
+				
+				if (!fdFound) 
+				{
+					System.out.println("Couldn't find an item with those details.");
+				}
+				
 				break;
 	
 			case "e":
@@ -94,7 +141,7 @@ public class main {
 				break;
 	
 			default:
-				System.out.println("Invalid input, please try again.");
+				System.out.println("Invalid input, please try again.\n");
 			}
 		}
 	}
