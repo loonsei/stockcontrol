@@ -83,9 +83,9 @@ public class main {
 			case "c":
 			case "C":
 				// ask user the title and the release date of the item they want to change 
-				System.out.println("What is the title of the item you would like to delete?");
+				System.out.println("What is the title of the item you would like to change?");
 				String findTitleForEdit = scnr.nextLine();
-				System.out.println("What is the release date of the item you would like to delete?");
+				System.out.println("What is the release date of the item you would like to change?");
 				int findYearForEdit = scnr.nextInt();
 				scnr.nextLine(); // throwaway nextLine bc of the nextInt
 				boolean feFound = false;
@@ -110,13 +110,18 @@ public class main {
 							e.setTitle(editTitle);
 							System.out.println("Title changed.\n");
 							
-						/*case "ry":
+							break;
+							
+						case "ry":
 						case "Ry":
 						case "RY":
 							System.out.println("What do you want to change the title to? Currently: "+e.releaseYear+"");
-							String editRY = scnr.nextLine();
+							int editRY = scnr.nextInt();
+							scnr.nextLine(); // throwaway nextLine bc of the nextInt
 							e.setReleaseYear(editRY);
-							System.out.println("Release year changed.\n");*/
+							System.out.println("Release year changed.\n");
+							
+							break;
 							
 						case "pub":
 						case "Pub":
@@ -125,6 +130,8 @@ public class main {
 							String editPub = scnr.nextLine();
 							e.setPublish(editPub);
 							System.out.println("Publisher changed.\n");
+							
+							break;
 						
 						case "dev":
 						case "Dev":
@@ -134,6 +141,8 @@ public class main {
 							e.setTitle(editDev);
 							System.out.println("Developer changed.\n");
 							
+							break;
+							
 						case "plat":
 						case "Plat":
 						case "PLAT":
@@ -141,7 +150,14 @@ public class main {
 							String editPlat = scnr.nextLine();
 							e.setTitle(editPlat);
 							System.out.println("Platform changed.\n");
+							
+							break;
+							
+						default:
+							System.out.println("Invalid input.");
 						}
+						
+						break;
 					}	
 				}
 				
@@ -150,6 +166,8 @@ public class main {
 					System.out.println("Couldn't find an item with those details.");
 				}
 				
+				// break out of for loop
+				// https://www.w3schools.com/java/java_break.asp 
 				break;
 	
 			case "d":
