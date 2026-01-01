@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class vg {
 	
 	String title;
@@ -7,7 +5,6 @@ public class vg {
 	String publish;
 	String dev;
 	String platform;
-	
 	
 	// constructor
 	public vg(String title, int releaseYear, String publish, String dev, String platform)
@@ -18,12 +15,6 @@ public class vg {
 		this.dev = dev;
 		this.platform = platform;
 	}
-	
-	/*public String toString() 
-	{
-		return title+" "+releaseYear+" "+publish+" "+dev+" "+platform;
-	}*/
-
 	
 	// getters and setters
 	public String getTitle() {

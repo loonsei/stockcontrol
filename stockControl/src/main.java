@@ -1,11 +1,17 @@
-import java.util.Scanner;
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.util.Scanner; 
+import java.util.ArrayList; 
 
 public class main {
 
 	public static void main(String[] args) 
 	{
 		Scanner scnr = new Scanner(System.in);
+		
+		// give user choice of accessing the vg menu or the customer menu
+		
+		
+		// video games
 		
 		// null safety (asked Google Gemini)
 		vg newGame = null;
@@ -23,14 +29,15 @@ public class main {
 			System.out.println("b. View the details of a video game. ");
 			System.out.println("c. Edit the details of a video game. ");
 			System.out.println("d. Delete a video game. ");
-			System.out.println("e. Exit program. ");
+			System.out.println("e. View all video games. ");
+			System.out.println("f. Exit program. ");
 			
 			String menuSelect = scnr.nextLine();
 			switch(menuSelect)
 			{
 			case "a":
 			case "A":
-				// asks for name, title, release date, publisher, developer and platform 
+				// asks for title, release date, publisher, developer and platform 
 				System.out.println("Enter the title of the video game you want to add: ");
 				String title = scnr.nextLine();
 				System.out.println("Enter the release year of the video game: ");
@@ -57,6 +64,7 @@ public class main {
 				// asks user the vg title to identify the game they are wanting to view 
 				System.out.println("What is the title of the game you are wanting to view? ");
 				String findTitle = scnr.nextLine();
+				// boolean check 
 				boolean titleFound = false;
 				// search through list
 				for (vg g : vgList) 
@@ -72,12 +80,13 @@ public class main {
 					
 				}
 				
+				// if title is not found in list
 				if (!titleFound) 
 				{
 					System.out.println("Not found.");
 				}
 				
-				// try and find way to loop this case if the user makes error
+				// ? try and find way to loop this case if the user makes error
 				break;
 	
 			case "c":
@@ -97,7 +106,7 @@ public class main {
 						feFound = true;
 						System.out.println("Found! Showing details...\n");
 						System.out.println("Title: "+e.title+" \nRelease year: "+e.releaseYear+" \nPublisher: "+e.publish+" \nDeveloper: "+e.dev+" \nPlatform: "+e.platform+" \n");
-						
+						// ask user which detail they want to edit 
 						System.out.println("What detail would you like to change? Answer from the following: \n- title\n- ry\n- pub\n- dev\n- plat\n");
 						String userAnswer = scnr.nextLine();
 						switch(userAnswer) 
@@ -107,6 +116,7 @@ public class main {
 						case "TITLE":
 							System.out.println("What do you want to change the title to? Currently: "+e.title+"");
 							String editTitle = scnr.nextLine();
+							// sets title to new value
 							e.setTitle(editTitle);
 							System.out.println("Title changed.\n");
 							
@@ -167,7 +177,6 @@ public class main {
 				}
 				
 				// break out of for loop
-				// https://www.w3schools.com/java/java_break.asp 
 				break;
 	
 			case "d":
@@ -216,17 +225,43 @@ public class main {
 				}
 				
 				break;
-	
+				
 			case "e":
 			case "E":
+				System.out.println("Full List of Video Games: \n");
+				for (vg f : vgList) 
+				{
+					System.out.println("Title: "+f.title+" \nRelease year: "+f.releaseYear+" \nPublisher: "+f.publish+" \nDeveloper: "+f.dev+" \nPlatform: "+f.platform+" \n");
+				}
+				
+				break;
+				
+			
+			case "f":
+			case "F":
 				// close/terminate the program
 				System.out.println("Program terminated.");
 				System.exit(0);
+				
 				break;
+				
+			case "g":
+			case "G":
+				
+				break;
+				
+				
 	
 			default:
 				System.out.println("Invalid input, please try again.\n");
 			}
 		}
+		
+		// customer
+		
+		// asks for name, stuff for dob, email, phone no. 
+		// System.out.println("Enter your name: ");
+		// String title = scnr.nextLine();
+		
 	}
 }
