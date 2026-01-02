@@ -20,7 +20,7 @@ public class vgMenu {
 		
 		while (true) 
 		{
-			System.out.println("Video game menu, pick an option: ");
+			System.out.println("\nVideo game menu, pick an option: ");
 			System.out.println("a. Add a new video game. ");
 			System.out.println("b. View the details of a video game. ");
 			System.out.println("c. Edit the details of a video game. ");
@@ -224,10 +224,19 @@ public class vgMenu {
 				
 			case "e":
 			case "E":
-				System.out.println("Full List of Video Games: \n");
-				for (vg f : vgList) 
+				// if arraylist is empty print message 
+				// https://www.w3schools.com/java/ref_arraylist_isempty.asp 
+				if (vgList.isEmpty()) 
 				{
-					System.out.println("Title: "+f.title+" \nRelease year: "+f.releaseYear+" \nPublisher: "+f.publish+" \nDeveloper: "+f.dev+" \nPlatform: "+f.platform+" \n");
+					System.out.println("No video games found in the list.");
+				}
+				else 
+				{
+					System.out.println("Full List of Video Games: \n");
+					for (vg f : vgList) 
+					{
+						System.out.println("Title: "+f.title+" \nRelease year: "+f.releaseYear+" \nPublisher: "+f.publish+" \nDeveloper: "+f.dev+" \nPlatform: "+f.platform+"");
+					}
 				}
 				
 				break;
