@@ -45,10 +45,14 @@ public class vgMenu {
 				String dev = scnr.nextLine();
 				System.out.println("Enter the platform of the video game: ");
 				String platform = scnr.nextLine();
+				System.out.println("Enter the price of the video game: ");
+				double price = scnr.nextDouble();
+				scnr.nextLine(); // throwaway
+				
 				
 				// call constructor
-				newGame = new vg(title, releaseYear, publish, dev, platform);
-				System.out.println("You have entered the following: "+newGame.title+", "+newGame.releaseYear+", "+newGame.publish+", "+newGame.dev+", "+newGame.platform+".\n");
+				newGame = new vg(title, releaseYear, publish, dev, platform, price);
+				System.out.println("You have entered the following: "+newGame.title+", "+newGame.releaseYear+", "+newGame.publish+", "+newGame.dev+", "+newGame.platform+", "+newGame.price+".\n");
 				
 				// store object in list 
 				vgList.add(newGame);
@@ -71,7 +75,7 @@ public class vgMenu {
 						// print the details of objects that have this these details
 						titleFound = true;
 						System.out.println("Found! Showing details...\n");
-						System.out.println("Title: "+g.title+" \nRelease year: "+g.releaseYear+" \nPublisher: "+g.publish+" \nDeveloper: "+g.dev+" \nPlatform: "+g.platform+" \n");
+						System.out.println("Title: "+g.title+" \nRelease year: "+g.releaseYear+" \nPublisher: "+g.publish+" \nDeveloper: "+g.dev+" \nPlatform: "+g.platform+" \nPrice: "+g.price+" \n");
 					}
 					
 				}
@@ -101,9 +105,9 @@ public class vgMenu {
 					{
 						feFound = true;
 						System.out.println("Found! Showing details...\n");
-						System.out.println("Title: "+e.title+" \nRelease year: "+e.releaseYear+" \nPublisher: "+e.publish+" \nDeveloper: "+e.dev+" \nPlatform: "+e.platform+" \n");
+						System.out.println("Title: "+e.title+" \nRelease year: "+e.releaseYear+" \nPublisher: "+e.publish+" \nDeveloper: "+e.dev+" \nPlatform: "+e.platform+" \nPrice: "+e.price+" \n");
 						// ask user which detail they want to edit 
-						System.out.println("What detail would you like to change? Answer from the following: \n- title\n- ry\n- pub\n- dev\n- plat\n");
+						System.out.println("What detail would you like to change? Answer from the following: \n- title\n- ry\n- pub\n- dev\n- plat\n- price\n");
 						String userAnswer = scnr.nextLine();
 						switch(userAnswer) 
 						{
@@ -144,7 +148,7 @@ public class vgMenu {
 						case "DEV":
 							System.out.println("What do you want to change the developer to? Currently: "+e.dev+"");
 							String editDev = scnr.nextLine();
-							e.setTitle(editDev);
+							e.setDev(editDev);
 							System.out.println("Developer changed.\n");
 							
 							break;
@@ -154,10 +158,21 @@ public class vgMenu {
 						case "PLAT":
 							System.out.println("What do you want to change the platform to? Currently: "+e.platform+"");
 							String editPlat = scnr.nextLine();
-							e.setTitle(editPlat);
+							e.setPlatform(editPlat);
 							System.out.println("Platform changed.\n");
 							
 							break;
+							
+						case "price":
+						case "Price":
+						case "PRICE":
+							System.out.println("What do you want to change the price to? Currently: "+e.price+"");
+							double editPrice = scnr.nextDouble();
+							scnr.nextLine();
+							e.setPrice(editPrice);
+							System.out.println("Price changed.\n");
+							
+							break; 
 							
 						default:
 							System.out.println("Invalid input.");
@@ -235,7 +250,7 @@ public class vgMenu {
 					System.out.println("Full List of Video Games: \n");
 					for (vg f : vgList) 
 					{
-						System.out.println("Title: "+f.title+" \nRelease year: "+f.releaseYear+" \nPublisher: "+f.publish+" \nDeveloper: "+f.dev+" \nPlatform: "+f.platform+"");
+						System.out.println("Title: "+f.title+" \nRelease year: "+f.releaseYear+" \nPublisher: "+f.publish+" \nDeveloper: "+f.dev+" \nPlatform: "+f.platform+" \nPrice: "+f.price+"");
 					}
 				}
 				

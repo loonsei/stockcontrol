@@ -28,14 +28,14 @@ public class main {
 			
 		case "b":
 		case "B":
-			// call video game menu method
+			// call customer menu method
 			custMenu.custMenu();
 			
 			break;
 			
 		case "c":
 		case "C":
-			// call video game menu method
+			// call order menu method
 			vgMenu.vgMenu();
 			
 			break;
