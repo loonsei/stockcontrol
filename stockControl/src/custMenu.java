@@ -6,11 +6,16 @@ import java.util.Scanner;
 
 public class custMenu {
 	
+	static ArrayList<customer> custList = new ArrayList<customer>();
+	
+	public ArrayList<customer> getCustList()
+	{
+		return custList;
+	}
+	
 	public static void custMenu() 
 	{
 		Scanner scnr = new Scanner(System.in);
-		
-		ArrayList<customer> custList = new ArrayList<customer>();
 		
 		// array list to store objects that will be deleted 
 		ArrayList<customer> forDeletion = new ArrayList<customer>();
@@ -107,7 +112,7 @@ public class custMenu {
 				
 				for (customer i : custList) 
 				{
-					if (i.getCustID() == findIDForEdit);
+					if (i.getCustID() == findIDForEdit)
 					{
 						feFound = true;
 						System.out.println("Found! Showing details...\n");
@@ -163,6 +168,7 @@ public class custMenu {
 							System.out.println("Invalid input.");
 						}
 						
+						// break out of loop
 						break;
 					}	
 				}
@@ -172,7 +178,6 @@ public class custMenu {
 					System.out.println("Couldn't find a customer with those details.");
 				}
 				
-				// break out of for loop
 				break;
 				
 			case "d":

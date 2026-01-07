@@ -36,7 +36,7 @@ public class main {
 		case "c":
 		case "C":
 			// call order menu method
-			vgMenu.vgMenu();
+			orderMenu.orderMenu();
 			
 			break;
 			

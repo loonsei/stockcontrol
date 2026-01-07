@@ -7,17 +7,17 @@ public class vg {
 	String publish;
 	String dev;
 	String platform;
-	double price;
+	// set price of games
+	static double price = 10.0;
 	
 	// constructor
-	public vg(String title, int releaseYear, String publish, String dev, String platform, double price)
+	public vg(String title, int releaseYear, String publish, String dev, String platform)
 	{
 		this.title = title;
 		this.releaseYear = releaseYear;
 		this.publish = publish;
 		this.dev = dev;
 		this.platform = platform;
-		this.price = price;
 	}
 
 	// getters and setters
@@ -61,11 +61,11 @@ public class vg {
 		this.platform = platform;
 	}
 		
-	public double getPrice() {
+	public static double getPrice() {
 		return price;
 	}
 
 	public void setPrice(double price) {
-		this.price = price;
+		vg.price = price;
 	}
 }

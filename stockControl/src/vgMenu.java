@@ -5,12 +5,12 @@ import java.util.Scanner;
 
 public class vgMenu {
 	
+	// for storing objects in array list
+	static ArrayList<vg> vgList = new ArrayList<vg>();
+	
 	public static void vgMenu()
 	{
 		Scanner scnr = new Scanner(System.in);
-		
-		// for storing objects in array list
-		ArrayList<vg> vgList = new ArrayList<vg>();
 		
 		// array list to store objects that will be deleted 
 		ArrayList<vg> forDeletion = new ArrayList<vg>();
@@ -45,14 +45,11 @@ public class vgMenu {
 				String dev = scnr.nextLine();
 				System.out.println("Enter the platform of the video game: ");
 				String platform = scnr.nextLine();
-				System.out.println("Enter the price of the video game: ");
-				double price = scnr.nextDouble();
-				scnr.nextLine(); // throwaway
-				
 				
 				// call constructor
-				newGame = new vg(title, releaseYear, publish, dev, platform, price);
-				System.out.println("You have entered the following: "+newGame.title+", "+newGame.releaseYear+", "+newGame.publish+", "+newGame.dev+", "+newGame.platform+", "+newGame.price+".\n");
+				newGame = new vg(title, releaseYear, publish, dev, platform);
+				System.out.println("You have entered the following: "+newGame.title+", "+newGame.releaseYear+", "+newGame.publish+", "+newGame.dev+", "+newGame.platform+", "+newGame.price+".");
+				System.out.println("All video games are £10.");
 				
 				// store object in list 
 				vgList.add(newGame);
@@ -75,7 +72,7 @@ public class vgMenu {
 						// print the details of objects that have this these details
 						titleFound = true;
 						System.out.println("Found! Showing details...\n");
-						System.out.println("Title: "+g.title+" \nRelease year: "+g.releaseYear+" \nPublisher: "+g.publish+" \nDeveloper: "+g.dev+" \nPlatform: "+g.platform+" \nPrice: "+g.price+" \n");
+						System.out.println("Title: "+g.title+" \nRelease year: "+g.releaseYear+" \nPublisher: "+g.publish+" \nDeveloper: "+g.dev+" \nPlatform: "+g.platform+" \nPrice: "+g.price+"");
 					}
 					
 				}
@@ -91,17 +88,18 @@ public class vgMenu {
 	
 			case "c":
 			case "C":
-				// ask user the title and the release date of the item they want to change 
-				System.out.println("What is the title of the item you would like to change?");
+				// asks user the vg title to identify the game they are wanting to edit 
+				System.out.println("What is the title of the game you are wanting to edit? ");
 				String findTitleForEdit = scnr.nextLine();
-				System.out.println("What is the release date of the item you would like to change?");
-				int findYearForEdit = scnr.nextInt();
-				scnr.nextLine(); // throwaway nextLine bc of the nextInt
-				boolean feFound = false;
-				
+				System.out.println("What is the release year of the game you are wanting to edit? ");
+				int findRYForEdit = scnr.nextInt();
+				scnr.nextLine(); // throwaway
+				// boolean check 
+				boolean feFound = false;		
+				// search through list
 				for (vg e : vgList) 
 				{
-					if (e.getTitle().equalsIgnoreCase(findTitleForEdit) && e.getReleaseYear() == findYearForEdit);
+					if (e.getTitle().equalsIgnoreCase(findTitleForEdit) && e.getReleaseYear() == findRYForEdit)
 					{
 						feFound = true;
 						System.out.println("Found! Showing details...\n");
@@ -118,7 +116,7 @@ public class vgMenu {
 							String editTitle = scnr.nextLine();
 							// sets title to new value
 							e.setTitle(editTitle);
-							System.out.println("Title changed.\n");
+							System.out.println("Title changed.");
 							
 							break;
 							
@@ -127,9 +125,9 @@ public class vgMenu {
 						case "RY":
 							System.out.println("What do you want to change the title to? Currently: "+e.releaseYear+"");
 							int editRY = scnr.nextInt();
-							scnr.nextLine(); // throwaway nextLine bc of the nextInt
+							scnr.nextLine(); // throwaway 
 							e.setReleaseYear(editRY);
-							System.out.println("Release year changed.\n");
+							System.out.println("Release year changed.");
 							
 							break;
 							
@@ -139,7 +137,7 @@ public class vgMenu {
 							System.out.println("What do you want to change the publisher to? Currently: "+e.publish+"");
 							String editPub = scnr.nextLine();
 							e.setPublish(editPub);
-							System.out.println("Publisher changed.\n");
+							System.out.println("Publisher changed.");
 							
 							break;
 						
@@ -149,7 +147,7 @@ public class vgMenu {
 							System.out.println("What do you want to change the developer to? Currently: "+e.dev+"");
 							String editDev = scnr.nextLine();
 							e.setDev(editDev);
-							System.out.println("Developer changed.\n");
+							System.out.println("Developer changed.");
 							
 							break;
 							
@@ -159,18 +157,7 @@ public class vgMenu {
 							System.out.println("What do you want to change the platform to? Currently: "+e.platform+"");
 							String editPlat = scnr.nextLine();
 							e.setPlatform(editPlat);
-							System.out.println("Platform changed.\n");
-							
-							break;
-							
-						case "price":
-						case "Price":
-						case "PRICE":
-							System.out.println("What do you want to change the price to? Currently: "+e.price+"");
-							double editPrice = scnr.nextDouble();
-							scnr.nextLine();
-							e.setPrice(editPrice);
-							System.out.println("Price changed.\n");
+							System.out.println("Platform changed.");
 							
 							break; 
 							
@@ -178,8 +165,9 @@ public class vgMenu {
 							System.out.println("Invalid input.");
 						}
 						
+						// break out of loop
 						break;
-					}	
+					}
 				}
 				
 				if (!feFound) 
@@ -187,7 +175,6 @@ public class vgMenu {
 					System.out.println("Couldn't find an item with those details.");
 				}
 				
-				// break out of for loop
 				break;
 	
 			case "d":
