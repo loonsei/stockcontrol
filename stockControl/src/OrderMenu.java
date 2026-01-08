@@ -1,5 +1,7 @@
 // 22504421 Amy Johnson 
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,16 +19,18 @@ public class OrderMenu {
 	public OrderMenu(Scanner scnr) 
 	{
 		this.scnr = scnr;
+		// load data from order.txt file in as soon as the order menu is loaded
+		loadOrder();
 	}
 	
-	// method for writing video games to a file
+	// method for writing orders to a file
 	public void saveOrder() 
 	{
 		FileWriter f;
 		try 
 		{
 			// create text file
-			f = new FileWriter("order.text");
+			f = new FileWriter("order.txt");
 		}
 		// catch any errors during writing
 		catch (IOException e)
@@ -39,7 +43,7 @@ public class OrderMenu {
 			// search through list and write all objects into string
 			for (Order o : orderList) 
 			{
-				String line = "Order ID: "+o.getOrderID()+"\nCustomer ID: "+o.cust.getCustID()+"\nGames bought: "+o.getGamesBought()+"\nTotal price: "+o.getTotal()+"\n-------------------\n";
+				String line = o.getOrderID()+","+o.cust.getCustID()+","+o.getGamesBought()+","+o.getTotal()+"\n";
 				f.write(line);
 			}
 
@@ -52,6 +56,55 @@ public class OrderMenu {
 		}
 	}
 	
+	public void loadOrder() 
+	{
+		// clear orderList to avoid duplicates when going between menus
+		orderList.clear();
+		
+		// reference arraylist
+		ArrayList<Customer> custList = CustMenu.custList;
+		BufferedReader r;
+		try 
+		{
+			r = new BufferedReader(new FileReader("order.txt"));
+			String line;
+			
+			// check if null, if not null read the next line
+			while((line = r.readLine()) != null) 
+			{
+				// create a string array for each value in order object, separating them by the commas
+				// https://www.geeksforgeeks.org/java/split-string-java-examples/
+				String[] index = line.split(",");
+				// convert back into int
+				int orderID = Integer.parseInt(index[0]);
+				int findCustID = Integer.parseInt(index[1]);
+				int gamesBought = Integer.parseInt(index[2]);
+				
+				for (Customer c : custList) 
+				{
+					if(c.getCustID() == findCustID) 
+					{
+						// import order if customer id exists
+						// create object from array and add to orderList
+						Order savedOrder = new Order(c, gamesBought);
+						// keep orderID from the text file
+						savedOrder.setOrderID(orderID);
+						orderList.add(savedOrder);
+						// stop looking once found
+						break;
+					}
+					
+				}
+			}
+			r.close();
+			System.out.println("Imported existing order data.\n");
+		}
+		catch (IOException e) 
+		{
+			System.err.println(e);
+			return;
+		}
+	}
 	
 	public void orderMenu() 
 	{	

@@ -1,5 +1,7 @@
 // 22504421 Amy Johnson 
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,16 +23,18 @@ public class CustMenu {
 	public CustMenu(Scanner scnr) 
 	{
 		this.scnr = scnr;
+		// load data from customer.txt file in as soon as the cust menu is loaded
+		loadCustomer();
 	}
 	
-	// method for writing video games to a file
+	// method for writing customers to a file
 	public void saveCustomer() 
 	{
 		FileWriter f;
 		try 
 		{
 			// create text file
-			f = new FileWriter("customer.text");
+			f = new FileWriter("customer.txt");
 		}
 		// catch any errors during writing
 		catch (IOException e)
@@ -43,7 +47,7 @@ public class CustMenu {
 			// search through list and write all objects into string
 			for (Customer c : custList) 
 			{
-				String line = "Customer ID: "+c.getCustID()+"\nName: "+c.getName()+"\nEmail: "+c.getEmail()+"\nPhone: "+c.getPhone()+"\n-------------------\n";
+				String line = c.getCustID()+","+c.getName()+","+c.getEmail()+","+c.getPhone()+"\n";
 				f.write(line);
 			}
 
@@ -53,6 +57,41 @@ public class CustMenu {
 		catch (IOException e)
 		{
 			System.err.println(e);
+		}
+	}
+	
+	public void loadCustomer() 
+	{
+		// clear custList to avoid duplicates when going between menus
+		custList.clear();
+		BufferedReader r;
+		try 
+		{
+			r = new BufferedReader(new FileReader("customer.txt"));
+			String line;
+			
+			// check if null, if not null read the next line
+			while((line = r.readLine()) != null) 
+			{
+				// create a string array for each value in customer object, separating them by the commas
+				// https://www.geeksforgeeks.org/java/split-string-java-examples/
+				String[] index = line.split(",");
+				// convert back into int
+				int savedID = Integer.parseInt(index[0]);
+				String name = index[1];
+				String email = index[2];
+				String phone = index[3];
+				
+				// create object from array and add to custList
+				custList.add(new Customer(savedID, name, email, phone));
+			}
+			r.close();
+			System.out.println("Imported existing customer data.");
+		}
+		catch (IOException e) 
+		{
+			System.err.println(e);
+			return;
 		}
 	}
 	
@@ -86,10 +125,12 @@ public class CustMenu {
 				String email = scnr.nextLine();
 				System.out.println("Enter their phone number: ");
 				String phone = scnr.nextLine();
-				int custID = 0;
+				
+				// generate random 6 digit number for ID, adds 100000 so id can never be less than 6 digits
+				int generatedCustID = (int)(Math.random() * 900000) + 100000;
 				
 				// call constructor
-				newCust = new Customer(custID, name, email, phone);
+				newCust = new Customer(generatedCustID, name, email, phone);
 				System.out.println("You have entered the following: "+newCust.name+", "+newCust.email+", "+newCust.phone+".\n");
 				System.out.println("The customer's ID is: "+newCust.custID+"");
 				

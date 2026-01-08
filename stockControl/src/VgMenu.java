@@ -1,5 +1,8 @@
 // 22504421 Amy Johnson 
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,16 +19,18 @@ public class VgMenu {
 	public VgMenu(Scanner scnr) 
 	{
 		this.scnr = scnr;
+		// load data from vg.txt file in as soon as the vg menu is loaded
+		loadVg();
 	}
 	
 	// method for writing video games to a file
 	public void saveVg() 
 	{
-		FileWriter f;
+		BufferedWriter f;
 		try 
 		{
 			// create text file
-			f = new FileWriter("vg.text");
+			f = new BufferedWriter(new FileWriter("vg.txt"));
 		}
 		// catch any errors during writing
 		catch (IOException e)
@@ -38,7 +43,7 @@ public class VgMenu {
 			// search through list and write all objects into string
 			for (Vg g : vgList) 
 			{
-				String line = "Title: "+g.getTitle()+"\nRY: "+g.getReleaseYear()+"\nPublisher: "+g.getPublish()+"\nDeveloper: "+g.getDev()+"\nPlatform: "+g.getPlatform()+"\n-------------------\n";
+				String line = g.getTitle()+","+g.getReleaseYear()+","+g.getPublish()+","+g.getDev()+","+g.getPlatform()+"\n";
 				f.write(line);
 			}
 
@@ -48,6 +53,42 @@ public class VgMenu {
 		catch (IOException e)
 		{
 			System.err.println(e);
+		}
+	}
+	
+	public void loadVg() 
+	{
+		// clear vgList to avoid duplicates when going between menus
+		vgList.clear();
+		BufferedReader r;
+		try 
+		{
+			r = new BufferedReader(new FileReader("vg.txt"));
+			String line;
+			
+			// check if null, if not null read the next line
+			while((line = r.readLine()) != null) 
+			{
+				// create a string array for each value in vg object, separating them by the commas
+				// https://www.geeksforgeeks.org/java/split-string-java-examples/
+				String[] index = line.split(",");
+				String title = index[0];
+				// convert back into int
+				int ry = Integer.parseInt(index[1]);
+				String pub = index[2];
+				String dev = index[3];
+				String plat = index[4];
+				
+				// create object from array and add to vgList
+				vgList.add(new Vg(title, ry, pub, dev, plat));
+			}
+			r.close();
+			System.out.println("Imported existing video game data.");
+		}
+		catch (IOException e) 
+		{
+			System.err.println(e);
+			return;
 		}
 	}
 	

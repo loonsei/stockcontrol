@@ -9,8 +9,7 @@ public class Customer {
 
 	public Customer(int custID, String name, String email, String phone)
 	{
-		// generate random 6 digit number for ID, adds 100000 so id can never be less than 6 digits
-		this.custID = (int)(Math.random() * 900000) + 100000;;
+		this.custID = custID;
 		this.name = name;
 		this.email = email;
 		this.phone = phone;

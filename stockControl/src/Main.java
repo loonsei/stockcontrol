@@ -19,7 +19,7 @@ public class Main {
 		
 		while(true) 
 		{
-			// give user choice of accessing the Vg menu, Customer menu or Order 
+			// give user choice of accessing the vg menu, customer menu or order 
 			
 			System.out.println("VG Company Stock Control. Which menu would you like to access?");
 			System.out.println("a. Video game menu. ");
@@ -39,14 +39,14 @@ public class Main {
 				
 			case "b":
 			case "B":
-				// call Customer menu method
+				// call customer menu method
 				custMenuLoader.custMenu();
 				
 				break;
 				
 			case "c":
 			case "C":
-				// call Order menu method
+				// call order menu method
 				orderMenuLoader.orderMenu();
 				
 				break;
