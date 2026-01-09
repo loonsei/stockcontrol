@@ -2,25 +2,38 @@
 
 import java.util.Scanner;
 
+import javax.swing.SwingUtilities;
+
 public class Main {
 	
 	public static void main(String[] args) 
 	{
 		Scanner scnr = new Scanner(System.in);
-		mainMenu(scnr);
-		scnr.close();
-	}
-	
-	public static void mainMenu(Scanner scnr) 
-	{	
+		
 		VgMenu vgMenuLoader = new VgMenu(scnr);
 		CustMenu custMenuLoader = new CustMenu(scnr);
 		OrderMenu orderMenuLoader = new OrderMenu(scnr);
 		
+		// launch gui + pass in menu loaders so gui can access classes
+		SwingUtilities.invokeLater(new Runnable() 
+		{
+			public void run() 
+			{
+				Gui gooey = new Gui(vgMenuLoader, custMenuLoader, orderMenuLoader);
+				gooey.setupGui();
+			}
+		});
+
+		// pass menu loaders into mainMenu function so can access classes
+		mainMenu(scnr, vgMenuLoader, custMenuLoader, orderMenuLoader);
+		scnr.close();
+	}
+	
+	public static void mainMenu(Scanner scnr, VgMenu vgMenuLoader, CustMenu custMenuLoader, OrderMenu orderMenuLoader) 
+	{	
 		while(true) 
 		{
 			// give user choice of accessing the vg menu, customer menu or order 
-			
 			System.out.println("VG Company Stock Control. Which menu would you like to access?");
 			System.out.println("a. Video game menu. ");
 			System.out.println("b. Customer menu. ");

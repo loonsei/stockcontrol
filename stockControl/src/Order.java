@@ -17,7 +17,8 @@ public class Order {
 		this.gamesBought = gamesBought;
 		this.total = gamesBought * Vg.getPrice();
 	}
-
+	
+	// getters and setters
 	public int getOrderID() {
 		return orderID;
 	}
