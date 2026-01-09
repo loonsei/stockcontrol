@@ -1,7 +1,6 @@
 // 22504421 Amy Johnson 
 
 import java.util.Scanner;
-
 import javax.swing.SwingUtilities;
 
 public class Main {
